@@ -2,6 +2,7 @@ using IdentityNew.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using IdentityNew.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,9 @@ builder.Services.AddAuthorization(options =>
     .Build();     
 });
 
+
+   builder.Services.AddScoped<IAuthorizationHandler, InvoiceCreatorAuthorizationHandler>();
+    
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

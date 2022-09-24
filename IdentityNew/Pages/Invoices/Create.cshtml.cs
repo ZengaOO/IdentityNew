@@ -7,15 +7,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using IdentityNew.Data;
 using IdentityNew.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace IdentityNew.Pages.Invoices
 {
-    public class CreateModel : PageModel
+    public class CreateModel : DI_BasePageModel
     {
         private readonly IdentityNew.Data.ApplicationDbContext _context;
 
-        public CreateModel(IdentityNew.Data.ApplicationDbContext context)
-        {
+        public CreateModel(ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService,userManager)
+        {       
             _context = context;
         }
 
@@ -36,8 +41,8 @@ namespace IdentityNew.Pages.Invoices
                 return Page();
             }
 
-            _context.Invoice.Add(Invoice);
-            await _context.SaveChangesAsync();
+            Context.Invoice.Add(Invoice);
+            await Context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
