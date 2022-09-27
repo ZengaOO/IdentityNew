@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 namespace IdentityNew.Authorization
 {
     public class InvoiceCreatorAuthorizationHandler :
-        AuthorizationHandler<OperationAuthorizationRequirement, Invoice >
+        AuthorizationHandler<OperationAuthorizationRequirement, Invoice>
     {
         UserManager<IdentityUser> _userManager;
 
@@ -20,10 +20,10 @@ namespace IdentityNew.Authorization
             OperationAuthorizationRequirement requirement,
             Invoice invoice)
         {
-          if(context.User == null || invoice == null)
+          if (context.User == null || invoice == null)
                 return Task.CompletedTask; 
           
-          if(requirement.Name != Constans.CreateOperationName &&
+          if (requirement.Name != Constans.CreateOperationName &&
                 requirement.Name != Constans.ReadOperationName && 
                 requirement.Name != Constans.UpdateOperationName &&
                 requirement.Name != Constans.DeleteOperationName)

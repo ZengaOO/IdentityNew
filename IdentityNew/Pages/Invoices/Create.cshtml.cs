@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using IdentityNew.Authorization;
 using IdentityNew.Data;
 using IdentityNew.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using IdentityNew.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityNew.Pages.Invoices
 {
     public class CreateModel : DI_BasePageModel
     {
-        private readonly IdentityNew.Data.ApplicationDbContext _context;
-
-        public CreateModel(ApplicationDbContext context,
+        public CreateModel(
+            ApplicationDbContext context, 
             IAuthorizationService authorizationService,
             UserManager<IdentityUser> userManager)
-            : base(context, authorizationService,userManager)
+            : base(context, authorizationService, userManager)
         {       
-            _context = context;
         }
 
         public IActionResult OnGet()
@@ -43,7 +35,7 @@ namespace IdentityNew.Pages.Invoices
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                 User, Invoice, InvoiceOperations.Create);
 
-            if (!isAuthorized.Succeeded == false)
+            if (isAuthorized.Succeeded == false)
             {
                 return Forbid();
             }
