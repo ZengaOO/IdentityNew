@@ -16,7 +16,7 @@ namespace IdentityNew.Pages.Invoices
 {
     public class EditModel : DI_BasePageModel
     {
-        private readonly IdentityNew.Data.ApplicationDbContext _context;
+        private readonly IdentityNew.Data.ApplicationDbContext Context;
 
         public EditModel(
             ApplicationDbContext context,
@@ -95,7 +95,7 @@ namespace IdentityNew.Pages.Invoices
 
         private bool InvoiceExists(int id)
         {
-          return _context.Invoice.Any(e => e.InvoiceId == id);
+          return Context.Invoice.Any(e => e.InvoiceId == id);
         }
     }
 }
