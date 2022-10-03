@@ -15,7 +15,7 @@ namespace IdentityNew.Authorization
         public static OperationAuthorizationRequirement Approved =
             new OperationAuthorizationRequirement { Name = Constans.ApprovedOperationName };
         public static OperationAuthorizationRequirement Reject =
-            new OperationAuthorizationRequirement { Name = Constans.RejectOperationName };
+            new OperationAuthorizationRequirement { Name = Constans.RejectedOperationName };
     }
 
     public class Constans
@@ -27,6 +27,9 @@ namespace IdentityNew.Authorization
         
         
         public static readonly string ApprovedOperationName = "Approved";
-        public static readonly string RejectOperationName = "Reject";
+        public static readonly string RejectedOperationName = "Rejected";
+
+        public static readonly string InvoiceManagersRole = "InvoiceManager";
+
     }
 }
