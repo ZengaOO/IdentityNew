@@ -66,11 +66,15 @@ namespace IdentityNew.Pages.Invoices
 
             Invoice.CreatorId = invoice.CreatorId;  
 
+
+
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                 User, Invoice, InvoiceOperations.Update);
 
             if (isAuthorized.Succeeded == false)
                 return Forbid();
+
+            invoice.Status = invoice.Status;
 
             Context.Attach(Invoice).State = EntityState.Modified;
 

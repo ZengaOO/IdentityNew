@@ -1,9 +1,15 @@
 ﻿@page
+@using IdentityNew.Authorization
+@using IdentityNew.Models
+@using Microsoft.AspNetCore.Authentication
+
+@inject IAuthenticationService AuthenticationService
+
 @model IdentityNew.Pages.Invoices.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
+   
 }
 
 <h1>Details</h1>

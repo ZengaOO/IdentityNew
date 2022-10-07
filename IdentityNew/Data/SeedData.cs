@@ -11,13 +11,22 @@ namespace IdentityNew.Data
             IServiceProvider serviceProvider,
             string password = "Test@1234")
         {
+            //var builder = new ConfigurationBuilder();    
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()))
             {
                 //manager
                 var managerUid = await EnsureUser(serviceProvider, "manager@demo.com", password);
-                await EnsureUser(serviceProvider, managerUid, Constants.InvoiceManagersRole);  
+                await EnsureUser(serviceProvider, managerUid, Constants.InvoiceManagersRole);
+
+                //administrator
+                var adminUid = await EnsureUser(serviceProvider, "admin@demo.com", password);
+                await EnsureUser(serviceProvider, managerUid, Constants.InvoiceAdminRole);
+
+
             } 
+
+
         }
 
         private static async Task<string> EnsureUser(
