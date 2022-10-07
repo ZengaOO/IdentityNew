@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityNew.Pages.Invoices
 {
+   
     public class CreateModel : DI_BasePageModel
     {
         public CreateModel(

@@ -38,10 +38,12 @@ namespace IdentityNew.Pages.Invoices
                 return NotFound();
             }
             
-            var isAuthorised = await AuthorizationService.AuthorizeAsync(
+            var isCreator = await AuthorizationService.AuthorizeAsync(
                 User, Invoice, InvoiceOperations.Read);
 
-            if (isAuthorised.Succeeded == false)
+            var isManager = User.IsInRole(Constants.InvoiceManagersRole);
+
+            if (isCreator.Succeeded == false && isManager == false)
                 return Forbid();
 
 

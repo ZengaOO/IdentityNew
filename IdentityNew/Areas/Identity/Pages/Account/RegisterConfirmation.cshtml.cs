@@ -48,7 +48,7 @@ namespace IdentityNew.Areas.Identity.Pages.Account
         {
             if (email == null)
             {
-                return RedirectToPage("/Index");
+                return RedirectToPage("./Index");
             }
             returnUrl = returnUrl ?? Url.Content("~/");
 
