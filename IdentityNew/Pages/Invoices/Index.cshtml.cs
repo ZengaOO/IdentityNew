@@ -32,7 +32,7 @@ namespace IdentityNew.Pages.Invoices
             var invoices = from i in Context.Invoice
                            select i;
 
-            var isManager = User.IsInRole(Constans.InvoiceManagersRole);
+            var isManager = User.IsInRole(Constants.InvoiceManagersRole);
 
             var currentUserId = UserManager.GetUserId(User);
 

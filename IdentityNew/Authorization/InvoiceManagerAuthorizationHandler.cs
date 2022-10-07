@@ -16,13 +16,13 @@ namespace IdentityNew.Authorization
             if(context.User == null || invoice == null)
                 return Task.CompletedTask;
 
-            if (requirement.Name != Constans.ApprovedOperationName &&
-                requirement.Name != Constans.RejectedOperationName)
+            if (requirement.Name != Constants.ApprovedOperationName &&
+                requirement.Name != Constants.RejectedOperationName)
             {
                 return Task.CompletedTask;
             }
 
-            if (context.User.IsInRole(Constans.InvoiceManagersRole))
+            if (context.User.IsInRole(Constants.InvoiceManagersRole))
                 context.Succeed(requirement);
             {
                 return Task.CompletedTask;

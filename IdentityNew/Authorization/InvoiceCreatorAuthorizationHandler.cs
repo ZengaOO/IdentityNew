@@ -23,10 +23,10 @@ namespace IdentityNew.Authorization
           if (context.User == null || invoice == null)
                 return Task.CompletedTask; 
           
-          if (requirement.Name != Constans.CreateOperationName &&
-                requirement.Name != Constans.ReadOperationName && 
-                requirement.Name != Constans.UpdateOperationName &&
-                requirement.Name != Constans.DeleteOperationName)
+          if (requirement.Name != Constants.CreateOperationName &&
+                requirement.Name != Constants.ReadOperationName && 
+                requirement.Name != Constants.UpdateOperationName &&
+                requirement.Name != Constants.DeleteOperationName)
           {
                 return Task.CompletedTask;
           }
