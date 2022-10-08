@@ -49,5 +49,32 @@ namespace IdentityNew.Pages.Invoices
 
             return Page();
         }
+
+        public async Task<IActionResult> OnPostAsync(int id, InvoiceStatus status)
+        {
+
+            Invoice = await Context.Invoice.FindAsync(id);
+
+            if (Invoice == null)
+                return NotFound();
+
+
+            var invoiceOperation = status == InvoiceStatus.Approved
+                ? InvoiceOperations.Approve
+                : InvoiceOperations.Reject;
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                User, Invoice, invoiceOperation);
+
+            if (isAuthorized.Succeeded == false)
+                return Forbid();
+
+            Invoice.Status = status;
+            Context.Invoice.Update(Invoice);
+
+            await Context.SaveChangesAsync();   
+
+            return RedirectToAction("./Index");   
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace IdentityNew.Authorization
             new OperationAuthorizationRequirement { Name = Constants.UpdateOperationName };
         public static OperationAuthorizationRequirement Delete =
             new OperationAuthorizationRequirement { Name = Constants.DeleteOperationName };
-        public static OperationAuthorizationRequirement Approved =
+        public static OperationAuthorizationRequirement Approve =
             new OperationAuthorizationRequirement { Name = Constants.ApprovedOperationName };
         public static OperationAuthorizationRequirement Reject =
             new OperationAuthorizationRequirement { Name = Constants.RejectedOperationName };
