@@ -4,9 +4,65 @@
     ViewData["Title"] = "Home page";
 }
 
-
+<head>
+    https://github.com/ZengaOO/IdentityNew/commit/3dc502fcf0b20e63c905c15ea705e3d0c796dd8b
+</head>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<div>
+    <canvas id="myChart"></canvas>
+</div>
+
+@section Scripts {
+
+    <script>
+
+        const labels = [
+        'January',
+        'February',
+        'March'
+        'April',
+        'May',
+        'June',
+        'Juli',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: [
+                {
+                    label: "Revenue",
+                    backgroundColor: "rgb(255,99,132)",
+                    borderColor: "rgb(255,99,132)",
+                    data: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 5]
+
+                }
+            ]
+
+        };
+
+        const config = {
+            type: 'line',
+            data: data,
+            options: { }
+        };
+
+        const myChart = new myChart(
+            document.getElementById('myChart'),
+            config
+
+        );
+
+
+    </script>
+}
