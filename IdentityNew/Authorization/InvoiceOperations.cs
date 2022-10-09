@@ -12,9 +12,9 @@ namespace IdentityNew.Authorization
             new OperationAuthorizationRequirement { Name = Constants.UpdateOperationName };
         public static OperationAuthorizationRequirement Delete =
             new OperationAuthorizationRequirement { Name = Constants.DeleteOperationName };
-        public static OperationAuthorizationRequirement Approve =
+        public static OperationAuthorizationRequirement Approved =
             new OperationAuthorizationRequirement { Name = Constants.ApprovedOperationName };
-        public static OperationAuthorizationRequirement Reject =
+        public static OperationAuthorizationRequirement Rejected =
             new OperationAuthorizationRequirement { Name = Constants.RejectedOperationName };
     }
 
@@ -30,7 +30,6 @@ namespace IdentityNew.Authorization
         public static readonly string RejectedOperationName = "Rejected";
 
         public static readonly string InvoiceManagersRole = "InvoiceManager";
-        
         
         public static readonly string InvoiceAdminRole = "InvoiceAdmin";
 

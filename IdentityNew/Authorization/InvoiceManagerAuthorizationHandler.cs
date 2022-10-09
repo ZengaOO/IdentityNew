@@ -12,9 +12,11 @@ namespace IdentityNew.Authorization
             OperationAuthorizationRequirement requirement,
             Invoice invoice)
         {
-            
-            if(context.User == null || invoice == null)
+
+            if (context.User == null || invoice == null)
+            {
                 return Task.CompletedTask;
+            }
 
             if (requirement.Name != Constants.ApprovedOperationName &&
                 requirement.Name != Constants.RejectedOperationName)

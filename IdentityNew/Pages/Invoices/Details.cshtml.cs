@@ -11,10 +11,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using IdentityNew.Authorization;
 
+
 namespace IdentityNew.Pages.Invoices
 {
     public class DetailsModel : DI_BasePageModel
-    {
+    { 
         public DetailsModel(
             ApplicationDbContext context,
             IAuthorizationService authorizationService,
@@ -44,10 +45,13 @@ namespace IdentityNew.Pages.Invoices
             var isManager = User.IsInRole(Constants.InvoiceManagersRole);
 
             if (isCreator.Succeeded == false && isManager == false)
+            { 
                 return Forbid();
+            }
 
-
-            return Page();
+            {
+                return Page();
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(int id, InvoiceStatus status)
@@ -55,26 +59,32 @@ namespace IdentityNew.Pages.Invoices
 
             Invoice = await Context.Invoice.FindAsync(id);
 
-            if (Invoice == null)
+            if(Invoice == null)
+            { 
                 return NotFound();
+            }
+               
 
 
             var invoiceOperation = status == InvoiceStatus.Approved
-                ? InvoiceOperations.Approve
-                : InvoiceOperations.Reject;
+                ? InvoiceOperations.Approved
+                : InvoiceOperations.Rejected;
 
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                 User, Invoice, invoiceOperation);
 
             if (isAuthorized.Succeeded == false)
+            { 
                 return Forbid();
+            }
 
             Invoice.Status = status;
             Context.Invoice.Update(Invoice);
 
-            await Context.SaveChangesAsync();   
-
-            return RedirectToAction("./Index");   
+            await Context.SaveChangesAsync();
+            { 
+                return RedirectToPage("./Index");
+            }
         }
     }
 }

@@ -79,8 +79,9 @@ namespace IdentityNew.Data
             }
 
             ir = await userManager.AddToRoleAsync(user, role);
-
-            return ir;
+            {
+                return ir;
+            }
         
         }
 

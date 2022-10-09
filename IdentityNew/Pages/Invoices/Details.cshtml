@@ -3,14 +3,13 @@
 @using IdentityNew.Models
 @using Microsoft.AspNetCore.Authorization
 
-@inject IAuthorisationService AuthorisationService
+@inject IAuthorizationService AuthorisationService
 
 @model IdentityNew.Pages.Invoices.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
-   
-}
+  }
 
 <h1>Details</h1>
 
@@ -48,30 +47,27 @@
 @{
 
     var isAuthorized = await AuthorisationService.AuthorizeAsync(
-                User, Model, Invoice, InvoiceOperations.Rejected);
+                User, Model.Invoice, InvoiceOperations.Rejected);
 
     @if(isAuthorized.Succeeded)
     {
-        
- 
-
-
-    @if(Model.Invoice.Status != InvoiceStatus.Approved)
+         
+        @if(Model.Invoice.Status != InvoiceStatus.Approved)
         {
-        <form style="display:inline;" method="post">
+            <form style="display:inline;" method="post">
                     <input hidden name="id" value="@Model.Invoice.InvoiceId">
                     <input hidden name="status" value="@InvoiceStatus.Approved">
                     <button type="submit" class="btn btn-xs btn-success">Approve</button>
-        </form>
+            </form>
         }
 
         @if(Model.Invoice.Status != InvoiceStatus.Rejected)
         {
-        <form style="display:inline;" method="post">
+           <form style="display:inline;" method="post">
                     <input hidden name="id" value="@Model.Invoice.InvoiceId">
                     <input hidden name="status" value="@InvoiceStatus.Rejected">
-                    <button type="submit" class="btn btn-xs btn-danger">Rejected</button>
-        </form>
+                     <button type="submit" class="btn btn-xs btn-danger">Rejected</button>
+           </form>
         }
     }
  }
@@ -80,7 +76,7 @@
 
     @if(isAuthorized.Succeeded == false)
     {
-        <a asp-page="./Edit" asp-route-id="@Model.Invoice?.InvoiceId">Edit</a>  
+        <a asp-page="./Edit" asp-route-id="@Model.Invoice.InvoiceId">Edit</a>  
     }
 
    |

@@ -4,6 +4,8 @@ using IdentityNew.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IdentityNew.Pages.Invoices
 {
@@ -43,8 +45,9 @@ namespace IdentityNew.Pages.Invoices
 
             Context.Invoice.Add(Invoice);
             await Context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            {
+                return RedirectToPage("./Index");
+            }
         }
     }
 }

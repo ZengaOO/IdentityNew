@@ -21,21 +21,23 @@ namespace IdentityNew.Authorization
             Invoice invoice)
         {
           if (context.User == null || invoice == null)
-                return Task.CompletedTask; 
-          
-          if (requirement.Name != Constants.CreateOperationName &&
+          { 
+              return Task.CompletedTask;
+          }
+
+            if (requirement.Name != Constants.CreateOperationName &&
                 requirement.Name != Constants.ReadOperationName && 
                 requirement.Name != Constants.UpdateOperationName &&
                 requirement.Name != Constants.DeleteOperationName)
-          {
+            {
                 return Task.CompletedTask;
-          }
+            }
 
             if (invoice.CreatorId == _userManager.GetUserId(context.User))
-            {
                 context.Succeed(requirement);
+            {
+                return Task.CompletedTask;
             }
-            return Task.CompletedTask;
         }
     }
 }
