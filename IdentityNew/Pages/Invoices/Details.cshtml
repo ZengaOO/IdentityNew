@@ -36,7 +36,13 @@
             @Html.DisplayFor(model => model.Invoice.InvoiceOwner)
         </dd>
          <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Invoice.Status)
+            @Html.DisplayNameFor(model => model.Invoice.InvoiceOwner)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Invoice.CreatorId)
+        </dd>
+         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Invoice.CreatorId)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Invoice.Status)
