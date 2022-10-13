@@ -1,4 +1,6 @@
 ﻿@page
+@using IdentityNew.Authorization
+
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -8,14 +10,19 @@
     https://github.com/ZengaOO/IdentityNew/commit/3dc502fcf0b20e63c905c15ea705e3d0c796dd8b
 </head>
 
-<div class="text-center">
+<div class="text-center mb-5">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+   <p>This is our Invoise Management System</p>
+   </div>
 
-<div>
+   @if(User.IsInRole(Constants.InvoiceAdminRole))
+{
+ <div>
     <canvas id="myChart"></canvas>
 </div>
+  
+}
+
 
 @section Scripts {
 
@@ -41,14 +48,30 @@
             labels: labels,
             datasets: [
                 {
-                    label: "Revenue",
+                    label: "Revenue Submitted",
+                    backgroundColor: "rgb(0,0,0)",
+                    borderColor: "rgb(0,0,0)",
+                    cubicInterpolationMode: "monotone",
+                    data: @Json.Serialize(Model.revenueSubmitted)
+
+                },
+
+                 label: "Revenue Approved",
+                    backgroundColor: "rgb(132,255,99)",
+                    borderColor: "rgb(132,255,99)",
+                     cubicInterpolationMode: "monotone",
+                    data: @Json.Serialize(Model.revenueApproved)
+                    
+                },
+
+                 label: "Revenue Rejected",
                     backgroundColor: "rgb(255,99,132)",
                     borderColor: "rgb(255,99,132)",
-                    data: @Json.Serialize(Model.revenue)
-
+                     cubicInterpolationMode: "monotone",
+                    data: @Json.Serialize(Model.revenueRejected)
+                   
                 }
             ]
-
         };
 
         const config = {

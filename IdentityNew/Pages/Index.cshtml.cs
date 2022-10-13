@@ -7,7 +7,9 @@ namespace IdentityNew.Pages
     
     public class IndexModel : PageModel
     {
-        public Dictionary<string, int> revenue;
+        public Dictionary<string, int> revenueSubmitted; 
+        public Dictionary<string, int> revenueApproved; 
+        public Dictionary<string, int> revenueRejected;
 
         private readonly ILogger<IndexModel> _logger;
 
@@ -22,28 +24,51 @@ namespace IdentityNew.Pages
 
         public void OnGet()
         {
-            revenue = new Dictionary<string, int>()
-            {
-                {"January", 0 },
-                {"February", 0 },
-                {"March", 0 }, 
-                {"May", 0 }, 
-                {"June", 0 },
-                {"Juli", 0 },
-                {"August", 0 }, 
-                {"September", 0 }, 
-                {"October", 0 }, 
-                {"November", 0 }, 
-                {"December", 0 },
-                
-            };
+             InitDict(ref revenueSubmitted);
+             InitDict(ref revenueApproved);
+             InitDict(ref revenueRejected);
 
             var invoices = _context.Invoice.ToList();
 
             foreach (var invoice in invoices)
             {
-                revenue[invoice.InvoiceMonth] += (int)invoice.InvoiceAmount;
+
+                switch(invoice.Status)
+                {
+                    case InvoiceStatus.Submitted:
+                        revenueSubmitted[invoice.InvoiceMonth] += (int)invoice.InvoiceAmount;
+                        break;
+                    case InvoiceStatus.Approved:
+                        revenueApproved[invoice.InvoiceMonth] += (int)invoice.InvoiceAmount;
+                        break;
+                    case InvoiceStatus.Rejected:
+                        revenueRejected[invoice.InvoiceMonth] += (int)invoice.InvoiceAmount;
+                        break;
+                        default:
+                        break;
+
+                }
+                               
             }
+        }
+
+        private void InitDict(ref Dictionary<string, int> dict)
+        {
+            dict = new Dictionary<string, int>()
+            {
+                {"January", 0 },
+                {"February", 0 },
+                {"March", 0 },
+                {"May", 0 },
+                {"June", 0 },
+                {"Juli", 0 },
+                {"August", 0 },
+                {"September", 0 },
+                {"October", 0 },
+                {"November", 0 },
+                {"December", 0 },
+
+            };
         }
     }
 }
