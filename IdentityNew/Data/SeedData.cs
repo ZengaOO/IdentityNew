@@ -9,7 +9,7 @@ namespace IdentityNew.Data
 
         public static async Task Initialize(
             IServiceProvider serviceProvider,
-            string password = "Test@1234")
+            string password)
         {
             //var builder = new ConfigurationBuilder();    
             using (var context = new ApplicationDbContext(
